@@ -1,6 +1,7 @@
 package notifier
 
 import (
+	"os"
 	"runtime"
 	"testing"
 
@@ -177,5 +178,67 @@ func TestLibraryNotifier_EmptyMessage(t *testing.T) {
 	// Should handle empty message gracefully or return error
 	if err != nil {
 		t.Logf("Send with empty message returned error: %v", err)
+	}
+}
+
+func TestGetAppName(t *testing.T) {
+	tests := []struct {
+		name     string
+		pwd      string
+		expected string
+	}{
+		{
+			name:     "full path with multiple directories",
+			pwd:      "/home/clobrano/workspace/foo",
+			expected: "workspace/foo",
+		},
+		{
+			name:     "path with exactly 2 directories",
+			pwd:      "/workspace/foo",
+			expected: "workspace/foo",
+		},
+		{
+			name:     "path with only 1 directory",
+			pwd:      "/foo",
+			expected: "foo",
+		},
+		{
+			name:     "root path",
+			pwd:      "/",
+			expected: "mcp-poke",
+		},
+		{
+			name:     "empty PWD",
+			pwd:      "",
+			expected: "mcp-poke",
+		},
+		{
+			name:     "path without leading slash",
+			pwd:      "home/user/project",
+			expected: "user/project",
+		},
+		{
+			name:     "path with trailing slash",
+			pwd:      "/home/user/project/",
+			expected: "user/project",
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			// Save original PWD
+			origPWD := os.Getenv("PWD")
+			defer os.Setenv("PWD", origPWD)
+
+			// Set test PWD
+			os.Setenv("PWD", tt.pwd)
+
+			// Call getAppName
+			result := getAppName()
+
+			if result != tt.expected {
+				t.Errorf("getAppName() = %q, expected %q (PWD=%q)", result, tt.expected, tt.pwd)
+			}
+		})
 	}
 }

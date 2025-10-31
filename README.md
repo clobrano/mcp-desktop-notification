@@ -10,6 +10,7 @@ A Model Context Protocol (MCP) server that enables AI agents to send desktop not
 - 🧪 **Dry-run mode** for testing without sending actual notifications
 - 📝 **Verbose logging** for debugging
 - 🔌 **MCP-compatible** using the official [go-sdk](https://github.com/modelcontextprotocol/go-sdk)
+- 📂 **Workspace identification** - app name displays the last 2 directories from PWD
 
 ## Installation
 
@@ -135,6 +136,19 @@ Result: Red/critical notification.
 - **User input required**: Alert when the AI agent needs approval or additional information
 - **Error notifications**: Immediately inform users of failures or issues
 - **Milestone updates**: Keep users informed of progress in multi-step processes
+
+## Workspace Identification
+
+The notification app name automatically displays the last 2 directories from your `PWD` (current working directory) to help you identify which workspace is sending notifications.
+
+**Examples:**
+- Working in `/home/carlo/workspace/foo` → Notifications show app name as `workspace/foo`
+- Working in `/home/carlo/projects/my-app` → Notifications show app name as `projects/my-app`
+- Working in `/projects` → Notifications show app name as `projects`
+
+This is especially useful when running multiple AI agents in different workspaces, allowing you to quickly identify the source of each notification.
+
+**Default:** If PWD is not available or is the root directory, the app name defaults to `mcp-poke`.
 
 ## Configuration
 

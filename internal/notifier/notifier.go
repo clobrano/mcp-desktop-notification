@@ -3,7 +3,10 @@ package notifier
 import (
 	"fmt"
 	"log"
+	"os"
+	"path/filepath"
 	"runtime"
+	"strings"
 
 	"github.com/clobrano/mcp-desktop-notification/internal/config"
 	"github.com/gen2brain/beeep"
@@ -26,6 +29,13 @@ type DryRunNotifier struct {
 
 // NewNotifier creates a new notifier based on configuration
 func NewNotifier(cfg *config.Config) (Notifier, error) {
+	// Set the app name from PWD environment variable
+	beeep.AppName = getAppName()
+
+	if cfg.Notification.Verbose {
+		log.Printf("[Notifier] App name set to: %s", beeep.AppName)
+	}
+
 	// If dry run mode is enabled, return dry run notifier
 	if cfg.Notification.DryRun {
 		return &DryRunNotifier{config: cfg}, nil
@@ -80,4 +90,38 @@ func (n *LibraryNotifier) getIcon(level string) string {
 		return levelConfig.Icon
 	}
 	return "" // default (no icon)
+}
+
+// getAppName extracts the last 2 directories from PWD environment variable
+// Returns "mcp-poke" as default if PWD is not available or path is too short
+func getAppName() string {
+	pwd := os.Getenv("PWD")
+	if pwd == "" {
+		return "mcp-poke"
+	}
+
+	// Clean the path and split into parts
+	cleanPath := filepath.Clean(pwd)
+	parts := strings.Split(cleanPath, string(filepath.Separator))
+
+	// Filter out empty strings (from leading slash)
+	var nonEmpty []string
+	for _, part := range parts {
+		if part != "" {
+			nonEmpty = append(nonEmpty, part)
+		}
+	}
+
+	// If we have 2 or more parts, take the last 2
+	if len(nonEmpty) >= 2 {
+		return filepath.Join(nonEmpty[len(nonEmpty)-2], nonEmpty[len(nonEmpty)-1])
+	}
+
+	// If only 1 part, return it
+	if len(nonEmpty) == 1 {
+		return nonEmpty[0]
+	}
+
+	// Fallback to default
+	return "mcp-poke"
 }
