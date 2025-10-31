@@ -16,7 +16,7 @@ A Model Context Protocol (MCP) server that enables AI agents to send desktop not
 ### From Source
 
 ```bash
-go install github.com/clobrano/mcp-desktop-notification/cmd/mcp-poke@latest
+go install github.com/clobrano/mcp-desktop-notification@latest
 ```
 
 ### Building Locally
@@ -24,7 +24,7 @@ go install github.com/clobrano/mcp-desktop-notification/cmd/mcp-poke@latest
 ```bash
 git clone https://github.com/clobrano/mcp-desktop-notification
 cd mcp-desktop-notification
-go build -o mcp-poke ./cmd/mcp-poke
+go build -o mcp-poke .
 ```
 
 ## Usage
@@ -150,12 +150,12 @@ go test -short -v ./internal/config
 
 ```bash
 # Build for current platform
-go build -o mcp-poke ./cmd/mcp-poke
+go build -o mcp-poke .
 
 # Cross-compile for other platforms
-GOOS=linux GOARCH=amd64 go build -o mcp-poke-linux ./cmd/mcp-poke
-GOOS=darwin GOARCH=arm64 go build -o mcp-poke-macos ./cmd/mcp-poke
-GOOS=windows GOARCH=amd64 go build -o mcp-poke.exe ./cmd/mcp-poke
+GOOS=linux GOARCH=amd64 go build -o mcp-poke-linux .
+GOOS=darwin GOARCH=arm64 go build -o mcp-poke-macos .
+GOOS=windows GOARCH=amd64 go build -o mcp-poke.exe .
 ```
 
 ## Requirements

@@ -5,7 +5,6 @@
 *.so
 *.dylib
 mcp-poke
-cmd/mcp-poke/mcp-poke
 
 # Test binary, built with `go test -c`
 *.test

@@ -3,7 +3,6 @@
 # Variables
 BINARY_NAME=mcp-poke
 BUILD_DIR=./bin
-CMD_DIR=./cmd/mcp-poke
 VERSION?=dev
 LDFLAGS=-ldflags "-X main.Version=$(VERSION)"
 
@@ -16,7 +15,7 @@ help: ## Show this help message
 build: ## Build the binary for current platform
 	@echo "Building $(BINARY_NAME)..."
 	@mkdir -p $(BUILD_DIR)
-	@go build $(LDFLAGS) -o $(BUILD_DIR)/$(BINARY_NAME) $(CMD_DIR)
+	@go build $(LDFLAGS) -o $(BUILD_DIR)/$(BINARY_NAME) .
 	@echo "Binary built: $(BUILD_DIR)/$(BINARY_NAME)"
 
 test: ## Run tests
@@ -37,7 +36,7 @@ clean: ## Clean build artifacts
 
 install: build ## Install binary to GOPATH/bin
 	@echo "Installing $(BINARY_NAME)..."
-	@go install $(LDFLAGS) $(CMD_DIR)
+	@go install $(LDFLAGS) .
 	@echo "Installed to $(shell go env GOPATH)/bin/$(BINARY_NAME)"
 
 lint: ## Run linters
@@ -54,25 +53,25 @@ run: build ## Build and run the binary
 build-linux: ## Build for Linux AMD64
 	@echo "Building for Linux..."
 	@mkdir -p $(BUILD_DIR)
-	@GOOS=linux GOARCH=amd64 go build $(LDFLAGS) -o $(BUILD_DIR)/$(BINARY_NAME)-linux-amd64 $(CMD_DIR)
+	@GOOS=linux GOARCH=amd64 go build $(LDFLAGS) -o $(BUILD_DIR)/$(BINARY_NAME)-linux-amd64 .
 	@echo "Linux binary built: $(BUILD_DIR)/$(BINARY_NAME)-linux-amd64"
 
 build-macos: ## Build for macOS ARM64
 	@echo "Building for macOS ARM64..."
 	@mkdir -p $(BUILD_DIR)
-	@GOOS=darwin GOARCH=arm64 go build $(LDFLAGS) -o $(BUILD_DIR)/$(BINARY_NAME)-macos-arm64 $(CMD_DIR)
+	@GOOS=darwin GOARCH=arm64 go build $(LDFLAGS) -o $(BUILD_DIR)/$(BINARY_NAME)-macos-arm64 .
 	@echo "macOS ARM64 binary built: $(BUILD_DIR)/$(BINARY_NAME)-macos-arm64"
 
 build-macos-amd64: ## Build for macOS AMD64
 	@echo "Building for macOS AMD64..."
 	@mkdir -p $(BUILD_DIR)
-	@GOOS=darwin GOARCH=amd64 go build $(LDFLAGS) -o $(BUILD_DIR)/$(BINARY_NAME)-macos-amd64 $(CMD_DIR)
+	@GOOS=darwin GOARCH=amd64 go build $(LDFLAGS) -o $(BUILD_DIR)/$(BINARY_NAME)-macos-amd64 .
 	@echo "macOS AMD64 binary built: $(BUILD_DIR)/$(BINARY_NAME)-macos-amd64"
 
 build-windows: ## Build for Windows AMD64
 	@echo "Building for Windows..."
 	@mkdir -p $(BUILD_DIR)
-	@GOOS=windows GOARCH=amd64 go build $(LDFLAGS) -o $(BUILD_DIR)/$(BINARY_NAME)-windows-amd64.exe $(CMD_DIR)
+	@GOOS=windows GOARCH=amd64 go build $(LDFLAGS) -o $(BUILD_DIR)/$(BINARY_NAME)-windows-amd64.exe .
 	@echo "Windows binary built: $(BUILD_DIR)/$(BINARY_NAME)-windows-amd64.exe"
 
 build-all: build-linux build-macos build-macos-amd64 build-windows ## Build for all platforms
