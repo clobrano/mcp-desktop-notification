@@ -77,18 +77,57 @@ Send a desktop notification to the user.
 - `title` (optional, string): The notification title (defaults to "Notification")
 - `level` (optional, string): Severity level - one of: `info`, `warning`, `error`, `success` (defaults to "info")
 
-### Example
+### Examples
 
+**Simple notification:**
 ```json
 {
   "name": "poke",
   "arguments": {
-    "message": "Your task has completed successfully!",
+    "message": "Your task has completed successfully!"
+  }
+}
+```
+Result: Desktop notification with title "Notification" and your message.
+
+**Task completion with custom title:**
+```json
+{
+  "name": "poke",
+  "arguments": {
+    "message": "Data processing finished. 10,000 records processed.",
     "title": "Task Complete",
     "level": "success"
   }
 }
 ```
+Result: Green/success notification with custom title.
+
+**Warning notification:**
+```json
+{
+  "name": "poke",
+  "arguments": {
+    "message": "Database migration requires your approval to continue.",
+    "title": "Action Required",
+    "level": "warning"
+  }
+}
+```
+Result: Yellow/warning notification.
+
+**Error alert:**
+```json
+{
+  "name": "poke",
+  "arguments": {
+    "message": "Failed to connect to API. Check your network connection.",
+    "title": "Connection Error",
+    "level": "error"
+  }
+}
+```
+Result: Red/critical notification.
 
 ## Use Cases
 
@@ -97,7 +136,13 @@ Send a desktop notification to the user.
 - **Error notifications**: Immediately inform users of failures or issues
 - **Milestone updates**: Keep users informed of progress in multi-step processes
 
-## Configuration Example
+## Configuration
+
+### Message Templates
+
+**Note**: The current implementation uses the message and title directly as provided by the agent. Template support is planned for a future release.
+
+The configuration file supports customization of notification behavior:
 
 ```yaml
 notification:
@@ -110,10 +155,6 @@ notification:
   # Notification delivery mode (default: "library")
   # Options: "library" (recommended) or "command" (advanced)
   mode: "library"
-
-  # Message template (applies to both modes)
-  template:
-    default: "{{.Title}}: {{.Message}} [{{.Level}}]"
 
   # Level mappings for urgency and icons
   levels:
@@ -129,6 +170,19 @@ notification:
     success:
       urgency: "low"
       icon: "dialog-information"
+```
+
+### Example: Customizing Notification Levels
+
+```yaml
+notification:
+  levels:
+    error:
+      urgency: "critical"       # Makes error notifications more prominent
+      icon: "dialog-error"       # Uses red error icon
+    success:
+      urgency: "low"             # Success notifications are less intrusive
+      icon: "emblem-default"     # Uses a checkmark or success icon
 ```
 
 ## Development

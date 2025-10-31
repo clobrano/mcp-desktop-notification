@@ -26,10 +26,11 @@ notification:
     macos: "osascript -e 'display notification \"{{.Message}}\" with title \"{{.Title}}\"'"
     windows: "powershell -Command \"[Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier('MCP Poke').Show((New-Object Windows.UI.Notifications.ToastNotification -ArgumentList ([Windows.Data.Xml.Dom.XmlDocument]::new())))\""
 
-  # Message template configuration
-  # Variables available: {{.Message}}, {{.Title}}, {{.Level}}, {{.Timestamp}}
-  template:
-    default: "{{.Title}}: {{.Message}} [{{.Level}}]"
+  # Message template configuration (NOT YET IMPLEMENTED - Coming in future release)
+  # The current version uses message and title directly as provided
+  # Future version will support: {{.Message}}, {{.Title}}, {{.Level}}, {{.Timestamp}}
+  # template:
+  #   default: "{{.Title}}: {{.Message}} [{{.Level}}]"
 
   # Notification level mappings
   # Configure urgency and icons for each severity level
