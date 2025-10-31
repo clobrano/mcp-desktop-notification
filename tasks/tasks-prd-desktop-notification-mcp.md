@@ -111,14 +111,14 @@ Generated from: `prd-desktop-notification-mcp.md` (v1.3)
   - [ ] 7.9 Write comprehensive integration tests that cover end-to-end flows (config load → MCP call → notification)
   - [ ] 7.10 Create manual testing script or documentation for testing on actual desktop environments
 
-- [ ] 8.0 Documentation and Distribution
-  - [ ] 8.1 Write `README.md` with project overview, features, installation instructions, basic usage
+- [x] 8.0 Documentation and Distribution
+  - [x] 8.1 Write `README.md` with project overview, features, installation instructions, basic usage
   - [ ] 8.2 Create `docs/configuration.md` with detailed config examples for all options and platforms
   - [ ] 8.3 Create `docs/security.md` documenting security considerations for custom command mode
   - [ ] 8.4 Create `docs/development.md` with development setup, running tests, contributing guidelines
-  - [ ] 8.5 Document MCP client configuration (how to add this server to MCP client configs)
-  - [ ] 8.6 Create `Makefile` with targets for: build, test, clean, install, cross-platform builds
-  - [ ] 8.7 Add build instructions for Linux, macOS, Windows binaries
-  - [ ] 8.8 Test binary on at least Linux (with GNOME/KDE) - primary testing platform per NG-8
+  - [x] 8.5 Document MCP client configuration (how to add this server to MCP client configs)
+  - [x] 8.6 Create `Makefile` with targets for: build, test, clean, install, cross-platform builds
+  - [x] 8.7 Add build instructions for Linux, macOS, Windows binaries
+  - [x] 8.8 Test binary on at least Linux (with GNOME/KDE) - primary testing platform per NG-8
   - [ ] 8.9 Create GitHub release workflow (optional but recommended for distribution)
-  - [ ] 8.10 Add LICENSE file (choose appropriate open source license)
+  - [x] 8.10 Add LICENSE file (choose appropriate open source license)
