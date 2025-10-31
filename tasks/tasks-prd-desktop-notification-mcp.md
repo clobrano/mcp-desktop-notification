@@ -68,16 +68,16 @@ Generated from: `prd-desktop-notification-mcp.md` (v1.3)
   - [x] 3.6 Write unit tests in `notifier_test.go` covering: successful notifications, error cases, level mapping
   - [x] 3.7 Add integration test that actually sends a test notification (can be run manually or in test mode)
 
-- [ ] 4.0 MCP Server Implementation
-  - [ ] 4.1 Research MCP protocol requirements and available Go SDKs (check for official MCP Go SDK or implement JSON-RPC manually)
-  - [ ] 4.2 Create `internal/mcp/server.go` with MCP server initialization and connection handling
-  - [ ] 4.3 Define `poke` tool schema in `internal/mcp/tools.go` matching PRD spec (message required, title/level optional)
-  - [ ] 4.4 Implement `poke` tool handler that parses parameters, validates input, and calls notifier
-  - [ ] 4.5 Wire up configuration to MCP server (pass config, notifier, logger to server)
-  - [ ] 4.6 Implement error responses that include descriptive error messages (FR-21, FR-23)
-  - [ ] 4.7 Create `cmd/mcp-poke/main.go` that initializes config, notifier, logger, and starts MCP server
-  - [ ] 4.8 Write unit tests in `server_test.go` covering: tool registration, parameter validation, error handling
-  - [ ] 4.9 Test MCP server manually with a simple MCP client (can be curl/test script)
+- [x] 4.0 MCP Server Implementation
+  - [x] 4.1 Research MCP protocol requirements and available Go SDKs (check for official MCP Go SDK or implement JSON-RPC manually)
+  - [x] 4.2 Create `internal/mcp/server.go` with MCP server initialization and connection handling
+  - [x] 4.3 Define `poke` tool schema in `internal/mcp/tools.go` matching PRD spec (message required, title/level optional)
+  - [x] 4.4 Implement `poke` tool handler that parses parameters, validates input, and calls notifier
+  - [x] 4.5 Wire up configuration to MCP server (pass config, notifier, logger to server)
+  - [x] 4.6 Implement error responses that include descriptive error messages (FR-21, FR-23)
+  - [x] 4.7 Create `cmd/mcp-poke/main.go` that initializes config, notifier, logger, and starts MCP server
+  - [x] 4.8 Write unit tests in `server_test.go` covering: tool registration, parameter validation, error handling
+  - [x] 4.9 Test MCP server manually with a simple MCP client (can be curl/test script)
 
 - [ ] 5.0 Template System and Level Mapping
   - [ ] 5.1 Create `internal/template/template.go` with template rendering using Go's `text/template`
