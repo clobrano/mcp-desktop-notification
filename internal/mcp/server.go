@@ -19,9 +19,9 @@ type Server struct {
 
 // PokeArgs represents the arguments for the poke tool
 type PokeArgs struct {
-	Message string `json:"message" jsonschema:"required,description=The notification message text"`
-	Title   string `json:"title,omitempty" jsonschema:"description=The notification title (optional)"`
-	Level   string `json:"level,omitempty" jsonschema:"enum=info|warning|error|success,description=Severity level (optional defaults to info)"`
+	Message string `json:"message" jsonschema:"The notification message text"`
+	Title   string `json:"title,omitempty" jsonschema:"The notification title"`
+	Level   string `json:"level,omitempty" jsonschema:"Severity level: info, warning, error, or success"`
 }
 
 // NewServer creates a new MCP server
