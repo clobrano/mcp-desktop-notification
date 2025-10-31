@@ -50,7 +50,7 @@ Generated from: `prd-desktop-notification-mcp.md` (v1.3)
   - [x] 1.5 Create basic `.gitignore` file for Go projects (binaries, vendor/, IDE files)
   - [x] 1.6 Set up basic project structure: `cmd/mcp-poke/`, `internal/config/`, `internal/notifier/`, `internal/mcp/`, `internal/template/`, `internal/logger/`
 
-- [ ] 2.0 Configuration Management System
+- [x] 2.0 Configuration Management System
   - [x] 2.1 Define `Config` struct in `internal/config/config.go` matching PRD YAML structure (dry_run, verbose, mode, commands, template, levels)
   - [x] 2.2 Implement XDG Base Directory specification support for Linux/macOS (`$XDG_CONFIG_HOME/mcp-desktop-notification/config.yaml`, fallback to `~/.config/`)
   - [x] 2.3 Implement Windows config path support (`%APPDATA%\mcp-desktop-notification\config.yaml`)
@@ -59,14 +59,14 @@ Generated from: `prd-desktop-notification-mcp.md` (v1.3)
   - [x] 2.6 Write unit tests in `config_test.go` covering: default config, XDG paths, Windows paths, invalid YAML handling
   - [x] 2.7 Create `config.example.yaml` with all configuration options documented
 
-- [ ] 3.0 Core Notification System with Library Integration
-  - [ ] 3.1 Define `Notifier` interface in `internal/notifier/notifier.go` with `Send(title, message, level string) error` method
-  - [ ] 3.2 Implement `LibraryNotifier` struct that uses `beeep.Notify()` for cross-platform notifications
-  - [ ] 3.3 Add platform detection using `runtime.GOOS` to handle any platform-specific quirks
-  - [ ] 3.4 Map severity levels (info/warning/error/success) to appropriate notification urgency/icons as supported by beeep
-  - [ ] 3.5 Implement error handling that returns descriptive errors when notification delivery fails
-  - [ ] 3.6 Write unit tests in `notifier_test.go` covering: successful notifications, error cases, level mapping
-  - [ ] 3.7 Add integration test that actually sends a test notification (can be run manually or in test mode)
+- [x] 3.0 Core Notification System with Library Integration
+  - [x] 3.1 Define `Notifier` interface in `internal/notifier/notifier.go` with `Send(title, message, level string) error` method
+  - [x] 3.2 Implement `LibraryNotifier` struct that uses `beeep.Notify()` for cross-platform notifications
+  - [x] 3.3 Add platform detection using `runtime.GOOS` to handle any platform-specific quirks
+  - [x] 3.4 Map severity levels (info/warning/error/success) to appropriate notification urgency/icons as supported by beeep
+  - [x] 3.5 Implement error handling that returns descriptive errors when notification delivery fails
+  - [x] 3.6 Write unit tests in `notifier_test.go` covering: successful notifications, error cases, level mapping
+  - [x] 3.7 Add integration test that actually sends a test notification (can be run manually or in test mode)
 
 - [ ] 4.0 MCP Server Implementation
   - [ ] 4.1 Research MCP protocol requirements and available Go SDKs (check for official MCP Go SDK or implement JSON-RPC manually)
