@@ -62,7 +62,7 @@ func (s *Server) registerPokeToolHandler() {
 	// Define the poke tool using AddTool
 	mcp.AddTool(s.mcp, &mcp.Tool{
 		Name:        "poke",
-		Description: "Send a desktop notification to communicate with the user. Use for task completions, errors, warnings, or whenever you need the user's attention while they may be working in another application.",
+		Description: "Send a desktop notification to alert the user. ALWAYS notify before requesting user input or approval. Also use to report completions, errors, warnings, and updates when the user may be in another application.",
 	}, s.handlePokeTool)
 }
 
