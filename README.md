@@ -166,10 +166,6 @@ notification:
   # Verbose logging (default: false, enable only for debugging)
   verbose: false
 
-  # Notification delivery mode (default: "library")
-  # Options: "library" (recommended) or "command" (advanced)
-  mode: "library"
-
   # Level mappings for urgency and icons
   levels:
     info:

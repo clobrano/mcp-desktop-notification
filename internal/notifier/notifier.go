@@ -41,12 +41,8 @@ func NewNotifier(cfg *config.Config) (Notifier, error) {
 		return &DryRunNotifier{config: cfg}, nil
 	}
 
-	// Create library-based notifier
-	if cfg.Notification.Mode == "library" {
-		return &LibraryNotifier{config: cfg}, nil
-	}
-
-	return nil, fmt.Errorf("unsupported notification mode: %s", cfg.Notification.Mode)
+	// Create library-based notifier (always uses beeep library)
+	return &LibraryNotifier{config: cfg}, nil
 }
 
 // Send sends a notification using the beeep library

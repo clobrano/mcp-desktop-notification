@@ -18,17 +18,8 @@ type Config struct {
 type NotificationConfig struct {
 	DryRun   bool              `yaml:"dry_run"`
 	Verbose  bool              `yaml:"verbose"`
-	Mode     string            `yaml:"mode"` // "library" or "command"
-	Commands Commands          `yaml:"commands"`
 	Template Template          `yaml:"template"`
 	Levels   map[string]Level  `yaml:"levels"`
-}
-
-// Commands contains platform-specific notification commands
-type Commands struct {
-	Linux   string `yaml:"linux"`
-	MacOS   string `yaml:"macos"`
-	Windows string `yaml:"windows"`
 }
 
 // Template contains message template configuration
@@ -48,12 +39,6 @@ func DefaultConfig() *Config {
 		Notification: NotificationConfig{
 			DryRun:  false,
 			Verbose: false,
-			Mode:    "library",
-			Commands: Commands{
-				Linux:   "",
-				MacOS:   "",
-				Windows: "",
-			},
 			Template: Template{
 				Default: "{{.Title}}: {{.Message}} [{{.Level}}]",
 			},
@@ -81,20 +66,8 @@ func DefaultConfig() *Config {
 
 // Validate checks if the configuration is valid
 func (c *Config) Validate() error {
-	// Validate mode
-	if c.Notification.Mode != "library" && c.Notification.Mode != "command" {
-		return fmt.Errorf("invalid mode: %s (must be 'library' or 'command')", c.Notification.Mode)
-	}
-
-	// If command mode, ensure at least one command is defined
-	if c.Notification.Mode == "command" {
-		if c.Notification.Commands.Linux == "" &&
-			c.Notification.Commands.MacOS == "" &&
-			c.Notification.Commands.Windows == "" {
-			return fmt.Errorf("command mode requires at least one platform command to be defined")
-		}
-	}
-
+	// No validation needed for now
+	// Future: could validate level names, icon paths, etc.
 	return nil
 }
 

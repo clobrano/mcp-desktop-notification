@@ -41,8 +41,8 @@ func main() {
 
 	// Log configuration if verbose
 	if cfg.Notification.Verbose {
-		log.Printf("[Main] Configuration loaded - Mode: %s, DryRun: %v, Verbose: %v",
-			cfg.Notification.Mode, cfg.Notification.DryRun, cfg.Notification.Verbose)
+		log.Printf("[Main] Configuration loaded - DryRun: %v, Verbose: %v",
+			cfg.Notification.DryRun, cfg.Notification.Verbose)
 	}
 
 	// Create notifier

@@ -12,20 +12,6 @@ notification:
   # Enable this only for testing and troubleshooting
   verbose: false
 
-  # Notification delivery mode (default: "library")
-  # Options:
-  #   - "library": Use Go notification library (beeep) - recommended, no external dependencies
-  #   - "command": Use custom platform-specific commands
-  mode: "library"
-
-  # Optional: Platform-specific custom commands
-  # Only used when mode is set to "command"
-  # Variables available: {{.Title}}, {{.Message}}, {{.Level}}, {{.UrgencyLevel}}, {{.Timestamp}}
-  commands:
-    linux: "notify-send '{{.Title}}' '{{.Message}}' -u {{.UrgencyLevel}}'"
-    macos: "osascript -e 'display notification \"{{.Message}}\" with title \"{{.Title}}\"'"
-    windows: "powershell -Command \"[Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier('MCP Poke').Show((New-Object Windows.UI.Notifications.ToastNotification -ArgumentList ([Windows.Data.Xml.Dom.XmlDocument]::new())))\""
-
   # Message template configuration (NOT YET IMPLEMENTED - Coming in future release)
   # The current version uses message and title directly as provided
   # Future version will support: {{.Message}}, {{.Title}}, {{.Level}}, {{.Timestamp}}

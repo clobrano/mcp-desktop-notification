@@ -10,7 +10,6 @@ import (
 
 func TestNewNotifier_LibraryMode(t *testing.T) {
 	cfg := config.DefaultConfig()
-	cfg.Notification.Mode = "library"
 	cfg.Notification.DryRun = false
 
 	notifier, err := NewNotifier(cfg)
@@ -19,7 +18,7 @@ func TestNewNotifier_LibraryMode(t *testing.T) {
 	}
 
 	if _, ok := notifier.(*LibraryNotifier); !ok {
-		t.Error("Expected LibraryNotifier for library mode")
+		t.Error("Expected LibraryNotifier")
 	}
 }
 

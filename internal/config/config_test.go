@@ -17,10 +17,6 @@ func TestDefaultConfig(t *testing.T) {
 		t.Error("Expected Verbose to be false by default")
 	}
 
-	if cfg.Notification.Mode != "library" {
-		t.Errorf("Expected Mode to be 'library', got %s", cfg.Notification.Mode)
-	}
-
 	if cfg.Notification.Template.Default == "" {
 		t.Error("Expected default template to be set")
 	}
@@ -40,43 +36,10 @@ func TestDefaultConfig(t *testing.T) {
 	}
 }
 
-func TestValidateConfig_ValidLibraryMode(t *testing.T) {
+func TestValidateConfig(t *testing.T) {
 	cfg := DefaultConfig()
 	if err := cfg.Validate(); err != nil {
 		t.Errorf("Expected valid config, got error: %v", err)
-	}
-}
-
-func TestValidateConfig_ValidCommandMode(t *testing.T) {
-	cfg := DefaultConfig()
-	cfg.Notification.Mode = "command"
-	cfg.Notification.Commands = Commands{
-		Linux:   "notify-send '{{.Title}}' '{{.Message}}'",
-		MacOS:   "osascript -e 'display notification \"{{.Message}}\" with title \"{{.Title}}\"'",
-		Windows: "powershell -Command \"Write-Host '{{.Title}}: {{.Message}}'\"",
-	}
-
-	if err := cfg.Validate(); err != nil {
-		t.Errorf("Expected valid config, got error: %v", err)
-	}
-}
-
-func TestValidateConfig_InvalidMode(t *testing.T) {
-	cfg := DefaultConfig()
-	cfg.Notification.Mode = "invalid"
-
-	if err := cfg.Validate(); err == nil {
-		t.Error("Expected error for invalid mode")
-	}
-}
-
-func TestValidateConfig_CommandModeWithoutCommands(t *testing.T) {
-	cfg := DefaultConfig()
-	cfg.Notification.Mode = "command"
-	cfg.Notification.Commands = Commands{}
-
-	if err := cfg.Validate(); err == nil {
-		t.Error("Expected error for command mode without commands defined")
 	}
 }
 
@@ -88,7 +51,7 @@ func TestLoadConfig_NonExistentFile(t *testing.T) {
 		t.Errorf("Expected no error for non-existent file, got: %v", err)
 	}
 
-	if cfg.Notification.Mode != "library" {
+	if cfg.Notification.DryRun {
 		t.Error("Expected default config when file doesn't exist")
 	}
 }
@@ -102,7 +65,6 @@ func TestLoadConfig_ValidYAML(t *testing.T) {
 notification:
   dry_run: true
   verbose: true
-  mode: library
   template:
     default: "Test: {{.Message}}"
   levels:
