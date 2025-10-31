@@ -42,7 +42,7 @@ Generated from: `prd-desktop-notification-mcp.md` (v1.3)
 
 ## Tasks
 
-- [ ] 1.0 Project Setup and Dependencies
+- [x] 1.0 Project Setup and Dependencies
   - [x] 1.1 Initialize Go module structure with `cmd/` and `internal/` directories
   - [x] 1.2 Add `github.com/gen2brain/beeep` dependency for cross-platform notifications
   - [x] 1.3 Add `gopkg.in/yaml.v3` dependency for YAML configuration parsing
@@ -51,13 +51,13 @@ Generated from: `prd-desktop-notification-mcp.md` (v1.3)
   - [x] 1.6 Set up basic project structure: `cmd/mcp-poke/`, `internal/config/`, `internal/notifier/`, `internal/mcp/`, `internal/template/`, `internal/logger/`
 
 - [ ] 2.0 Configuration Management System
-  - [ ] 2.1 Define `Config` struct in `internal/config/config.go` matching PRD YAML structure (dry_run, verbose, mode, commands, template, levels)
-  - [ ] 2.2 Implement XDG Base Directory specification support for Linux/macOS (`$XDG_CONFIG_HOME/mcp-desktop-notification/config.yaml`, fallback to `~/.config/`)
-  - [ ] 2.3 Implement Windows config path support (`%APPDATA%\mcp-desktop-notification\config.yaml`)
-  - [ ] 2.4 Create `LoadConfig()` function that loads YAML file or returns sensible defaults if file doesn't exist
-  - [ ] 2.5 Implement config validation (e.g., valid mode values, required fields for command mode)
-  - [ ] 2.6 Write unit tests in `config_test.go` covering: default config, XDG paths, Windows paths, invalid YAML handling
-  - [ ] 2.7 Create `config.example.yaml` with all configuration options documented
+  - [x] 2.1 Define `Config` struct in `internal/config/config.go` matching PRD YAML structure (dry_run, verbose, mode, commands, template, levels)
+  - [x] 2.2 Implement XDG Base Directory specification support for Linux/macOS (`$XDG_CONFIG_HOME/mcp-desktop-notification/config.yaml`, fallback to `~/.config/`)
+  - [x] 2.3 Implement Windows config path support (`%APPDATA%\mcp-desktop-notification\config.yaml`)
+  - [x] 2.4 Create `LoadConfig()` function that loads YAML file or returns sensible defaults if file doesn't exist
+  - [x] 2.5 Implement config validation (e.g., valid mode values, required fields for command mode)
+  - [x] 2.6 Write unit tests in `config_test.go` covering: default config, XDG paths, Windows paths, invalid YAML handling
+  - [x] 2.7 Create `config.example.yaml` with all configuration options documented
 
 - [ ] 3.0 Core Notification System with Library Integration
   - [ ] 3.1 Define `Notifier` interface in `internal/notifier/notifier.go` with `Send(title, message, level string) error` method

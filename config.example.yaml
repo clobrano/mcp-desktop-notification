@@ -1,0 +1,48 @@
+# MCP Desktop Notification Configuration Example
+# Copy this file to the appropriate location for your platform:
+#   Linux/macOS: ~/.config/mcp-desktop-notification/config.yaml
+#   Windows: %APPDATA%\mcp-desktop-notification\config.yaml
+
+notification:
+  # Dry-run mode for testing (default: false)
+  # When enabled, notifications are logged but not actually sent
+  dry_run: false
+
+  # Verbose logging for debugging (default: false)
+  # Enable this only for testing and troubleshooting
+  verbose: false
+
+  # Notification delivery mode (default: "library")
+  # Options:
+  #   - "library": Use Go notification library (beeep) - recommended, no external dependencies
+  #   - "command": Use custom platform-specific commands
+  mode: "library"
+
+  # Optional: Platform-specific custom commands
+  # Only used when mode is set to "command"
+  # Variables available: {{.Title}}, {{.Message}}, {{.Level}}, {{.UrgencyLevel}}, {{.Timestamp}}
+  commands:
+    linux: "notify-send '{{.Title}}' '{{.Message}}' -u {{.UrgencyLevel}}'"
+    macos: "osascript -e 'display notification \"{{.Message}}\" with title \"{{.Title}}\"'"
+    windows: "powershell -Command \"[Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier('MCP Poke').Show((New-Object Windows.UI.Notifications.ToastNotification -ArgumentList ([Windows.Data.Xml.Dom.XmlDocument]::new())))\""
+
+  # Message template configuration
+  # Variables available: {{.Message}}, {{.Title}}, {{.Level}}, {{.Timestamp}}
+  template:
+    default: "{{.Title}}: {{.Message}} [{{.Level}}]"
+
+  # Notification level mappings
+  # Configure urgency and icons for each severity level
+  levels:
+    info:
+      urgency: "normal"
+      icon: ""
+    warning:
+      urgency: "normal"
+      icon: "dialog-warning"
+    error:
+      urgency: "critical"
+      icon: "dialog-error"
+    success:
+      urgency: "low"
+      icon: "dialog-information"
